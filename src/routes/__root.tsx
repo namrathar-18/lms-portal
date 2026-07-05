@@ -10,7 +10,7 @@ import {
 import { useEffect, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
-import { reportLovableError } from "../lib/lovable-error-reporting";
+import { reportError } from "../lib/error-reporting";
 import { AuthProvider } from "@/lib/auth";
 import { Toaster } from "@/components/ui/sonner";
 
@@ -40,7 +40,7 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
   console.error(error);
   const router = useRouter();
   useEffect(() => {
-    reportLovableError(error, { boundary: "tanstack_root_error_component" });
+    reportError(error, { boundary: "tanstack_root_error_component" });
   }, [error]);
 
   return (
@@ -87,8 +87,6 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "twitter:card", content: "summary" },
       { name: "twitter:title", content: "Lumen LMS — Learn, Teach, Grow" },
       { name: "twitter:description", content: "A clean, modern learning management platform with courses, quizzes, assignments, and instructor tools." },
-      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3cbe063b-22c7-4f56-9388-dfd5d12d247a/id-preview-c7227dff--acdad149-d716-45ee-ba17-9e3b74dee8ce.lovable.app-1781703738362.png" },
-      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/3cbe063b-22c7-4f56-9388-dfd5d12d247a/id-preview-c7227dff--acdad149-d716-45ee-ba17-9e3b74dee8ce.lovable.app-1781703738362.png" },
     ],
     links: [{ rel: "stylesheet", href: appCss }],
   }),

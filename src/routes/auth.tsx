@@ -4,7 +4,7 @@ import { GraduationCap } from "lucide-react";
 import { z } from "zod";
 import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
-import { lovable } from "@/integrations/lovable/index";
+import { authClient } from "@/integrations/auth";
 import { useAuth } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -31,7 +31,7 @@ function AuthPage() {
 
   async function handleGoogle() {
     setSubmitting(true);
-    const res = await lovable.auth.signInWithOAuth("google", {
+    const res = await authClient.auth.signInWithOAuth("google", {
       redirect_uri: window.location.origin,
     });
     if (res.error) {
